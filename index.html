@@ -796,6 +796,28 @@ section {
   flex-wrap: wrap;
   align-items: center;
   gap: 16px 24px;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 0 0 rgba(0,255,136,0);
+  transition: border-color 0.25s ease, box-shadow 0.25s ease, background 0.25s ease;
+  animation: techStripPulse 3.2s ease-in-out infinite;
+}
+.tech-strip::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -45%;
+  width: 40%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(0,255,136,0.12), transparent);
+  transform: skewX(-20deg);
+  animation: techStripSweep 3.8s linear infinite;
+  pointer-events: none;
+}
+.tech-strip:hover {
+  border-color: rgba(0,255,136,0.35);
+  background: rgba(0,255,136,0.04);
+  box-shadow: 0 0 22px rgba(0,255,136,0.14), inset 0 0 18px rgba(0,255,136,0.05);
 }
 .tech-strip-label {
   font-family: 'Orbitron', sans-serif;
@@ -804,6 +826,7 @@ section {
   letter-spacing: 3px;
   color: var(--green);
   white-space: nowrap;
+  text-shadow: 0 0 10px rgba(0,255,136,0.5);
 }
 .tech-strip-items {
   display: flex;
@@ -819,6 +842,35 @@ section {
   border: 1px solid rgba(255,255,255,0.08);
   color: var(--text-dim);
   border-radius: 2px;
+  transition: color 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
+}
+.tech-strip:hover .tech-strip-items span {
+  border-color: rgba(0,255,136,0.26);
+  color: #9ce9cb;
+}
+.tech-strip-items span:hover {
+  color: #d7ffe9;
+  border-color: rgba(0,255,136,0.45);
+  box-shadow: 0 0 12px rgba(0,255,136,0.2);
+  transform: translateY(-1px);
+}
+
+@keyframes techStripPulse {
+  0%, 100% {
+    box-shadow: 0 0 0 rgba(0,255,136,0);
+  }
+  50% {
+    box-shadow: 0 0 18px rgba(0,255,136,0.1);
+  }
+}
+
+@keyframes techStripSweep {
+  0% {
+    left: -45%;
+  }
+  100% {
+    left: 120%;
+  }
 }
 
 /* PROJECTS */
@@ -910,6 +962,9 @@ section {
 
 /* GITHUB */
 #github-stats { background: rgba(0,0,0,0.12); }
+#github-stats .section-inner {
+  max-width: 1320px;
+}
 .github-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
@@ -924,21 +979,23 @@ section {
 .github-graph-card {
   border: 1px solid var(--border);
   background: rgba(0,255,136,0.03);
-  padding: 10px;
+  padding: 8px;
 }
 .github-graph-card img {
-  width: 100%;
+  width: 95%;
   display: block;
+  margin: 0 auto;
 }
 .github-activity {
   border: 1px solid var(--border);
   background: rgba(0,255,136,0.03);
-  padding: 10px;
+  padding: 8px;
   margin-bottom: 18px;
 }
 .github-activity img {
-  width: 100%;
+  width: 97%;
   display: block;
+  margin: 0 auto;
 }
 .github-bar {
   margin-top: 10px;
