@@ -284,6 +284,7 @@ nav {
 .hero-glow-1, .hero-glow-2 {
   transition: transform 0.2s ease-out;
   will-change: transform;
+  animation: softFloat 12s ease-in-out infinite;
 }
 .hex-bg-text {
   position: absolute;
@@ -361,6 +362,11 @@ nav {
   color: var(--blue);
   text-transform: uppercase;
   margin-bottom: 32px;
+}
+
+@keyframes softFloat {
+  0%, 100% { transform: translate3d(0, 0, 0) scale(1); }
+  50% { transform: translate3d(0, -10px, 0) scale(1.03); }
 }
 
 .hero-desc {
@@ -989,24 +995,139 @@ section {
 }
 .github-graph-card {
   border: 1px solid var(--border);
-  background: rgba(0,255,136,0.03);
-  padding: 8px;
-}
-.github-graph-card img {
-  width: 95%;
-  display: block;
-  margin: 0 auto;
+  background: linear-gradient(180deg, rgba(0,255,136,0.04), rgba(0,0,0,0.22));
+  padding: 18px;
+  min-height: 220px;
 }
 .github-activity {
   border: 1px solid var(--border);
   background: rgba(0,255,136,0.03);
-  padding: 8px;
+  padding: 18px;
   margin-bottom: 18px;
 }
-.github-activity img {
-  width: 97%;
-  display: block;
-  margin: 0 auto;
+.github-card-title {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 14px;
+  color: #fff;
+  letter-spacing: 1px;
+  margin-bottom: 6px;
+}
+.github-card-subtitle {
+  font-size: 11px;
+  color: var(--text-dim);
+  line-height: 1.6;
+  margin-bottom: 16px;
+}
+.github-placeholder {
+  min-height: 172px;
+  display: grid;
+  place-items: center;
+  color: var(--text-dim);
+  font-size: 12px;
+  letter-spacing: 1px;
+  text-align: center;
+}
+.github-metric-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+}
+.github-metric {
+  padding: 14px;
+  border: 1px solid rgba(255,255,255,0.06);
+  background: rgba(0,0,0,0.2);
+  border-radius: 2px;
+}
+.github-metric-label {
+  font-size: 10px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--text-dim);
+  margin-bottom: 8px;
+}
+.github-metric-value {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 24px;
+  color: var(--green);
+  margin-bottom: 4px;
+}
+.github-metric-desc {
+  font-size: 11px;
+  color: var(--text-dim);
+  line-height: 1.7;
+}
+.github-language-list {
+  display: grid;
+  gap: 12px;
+}
+.github-language-row {
+  display: grid;
+  grid-template-columns: 110px 1fr 46px;
+  gap: 12px;
+  align-items: center;
+}
+.github-language-name {
+  font-size: 11px;
+  color: var(--text);
+  letter-spacing: 0.5px;
+}
+.github-language-track {
+  height: 8px;
+  border: 1px solid var(--border);
+  background: rgba(255,255,255,0.04);
+  border-radius: 999px;
+  overflow: hidden;
+}
+.github-language-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--green), var(--blue));
+  box-shadow: 0 0 16px rgba(0,255,136,0.2);
+  border-radius: inherit;
+  width: 0;
+}
+.github-language-percent {
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 10px;
+  color: var(--green);
+  text-align: right;
+}
+.github-repo-list {
+  display: grid;
+  gap: 12px;
+}
+.github-repo-item {
+  padding: 14px 16px;
+  border: 1px solid rgba(255,255,255,0.07);
+  background: rgba(0,0,0,0.22);
+  border-radius: 2px;
+}
+.github-repo-item-head {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  align-items: center;
+  margin-bottom: 8px;
+}
+.github-repo-name {
+  font-size: 12px;
+  color: #fff;
+}
+.github-repo-stars {
+  font-size: 10px;
+  letter-spacing: 1px;
+  color: var(--amber);
+  font-family: 'Share Tech Mono', monospace;
+}
+.github-repo-desc {
+  font-size: 11px;
+  color: var(--text-dim);
+  line-height: 1.7;
+}
+.github-card-note {
+  margin-top: 12px;
+  font-size: 10px;
+  letter-spacing: 1px;
+  color: var(--text-dim);
 }
 .github-bar {
   margin-top: 10px;
@@ -1417,15 +1538,284 @@ footer {
 .fade-in {
   opacity: 1;
   transform: translateY(0);
-  transition: opacity 0.6s ease, transform 0.6s ease;
+  transition: opacity 0.9s cubic-bezier(0.16, 1, 0.3, 1), transform 0.9s cubic-bezier(0.16, 1, 0.3, 1), filter 0.9s ease;
+  will-change: opacity, transform, filter;
 }
 .fade-in.hidden {
   opacity: 0;
-  transform: translateY(20px);
+  transform: translateY(28px) scale(0.985);
+  filter: blur(4px);
 }
 .fade-in.visible {
   opacity: 1;
   transform: translateY(0);
+  filter: blur(0);
+}
+
+.hero-left,
+.hero-right,
+.project-card,
+.skill-group,
+.cert-item,
+.contact-link,
+.stat-card,
+.github-graph-card,
+.github-activity,
+.edu-card,
+.contact-terminal {
+  transition: transform 0.28s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.28s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.28s ease, background 0.28s ease;
+}
+
+.hero-left:hover,
+.hero-right:hover {
+  transform: translateY(-2px);
+}
+
+.react-lab {
+  background: rgba(0, 0, 0, 0.18);
+}
+
+.react-lab-shell {
+  border: 1px solid var(--border);
+  background: linear-gradient(180deg, rgba(0,255,136,0.04), rgba(0,0,0,0.24));
+  border-radius: 4px;
+  padding: 24px;
+  overflow: hidden;
+  position: relative;
+}
+
+.react-lab-shell::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at top right, rgba(0,170,255,0.08), transparent 45%), radial-gradient(circle at bottom left, rgba(0,255,136,0.08), transparent 42%);
+  pointer-events: none;
+}
+
+.react-lab-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+  margin-bottom: 22px;
+  position: relative;
+  z-index: 1;
+}
+
+.react-lab-eyebrow {
+  font-size: 10px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--green);
+  margin-bottom: 8px;
+}
+
+.react-lab-title {
+  font-family: 'Orbitron', sans-serif;
+  color: #fff;
+  font-size: 18px;
+  letter-spacing: 1px;
+  margin-bottom: 6px;
+}
+
+.react-lab-copy {
+  font-size: 12px;
+  color: var(--text-dim);
+  line-height: 1.8;
+  max-width: 760px;
+}
+
+.react-lab-layout {
+  display: grid;
+  grid-template-columns: 280px 1fr;
+  gap: 20px;
+  position: relative;
+  z-index: 1;
+}
+
+.react-lab-tabs {
+  display: grid;
+  gap: 10px;
+}
+
+.react-lab-tab {
+  width: 100%;
+  text-align: left;
+  border: 1px solid rgba(255,255,255,0.08);
+  background: rgba(0,0,0,0.25);
+  color: var(--text-dim);
+  padding: 14px 16px;
+  border-radius: 2px;
+  font-family: 'Share Tech Mono', monospace;
+  letter-spacing: 1px;
+  cursor: pointer;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+  transition: transform 0.28s cubic-bezier(0.16, 1, 0.3, 1), background-color 0.28s ease, border-color 0.28s ease, color 0.28s ease, box-shadow 0.28s ease;
+}
+
+.react-lab-tab.active {
+  color: #fff;
+  border-color: rgba(0,255,136,0.35);
+  background: var(--green-dim);
+  box-shadow: 0 0 20px rgba(0,255,136,0.08);
+  transform: translateX(4px);
+}
+
+.react-lab-panel {
+  border: 1px solid var(--border-blue);
+  background: rgba(10,14,26,0.78);
+  border-radius: 4px;
+  padding: 22px;
+  min-height: 100%;
+  display: grid;
+  gap: 18px;
+  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.6s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.6s ease, background 0.6s ease;
+}
+
+.react-lab-panel-body {
+  display: grid;
+  gap: 18px;
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 0.55s cubic-bezier(0.16, 1, 0.3, 1), transform 0.55s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.react-lab-panel.is-fading-out .react-lab-panel-body {
+  opacity: 0;
+  transform: translateY(14px) scale(0.988);
+}
+
+.react-lab-panel.is-fading-in .react-lab-panel-body {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+.react-lab-panel-head {
+  display: flex;
+  justify-content: space-between;
+  gap: 14px;
+  align-items: flex-start;
+}
+
+.react-lab-panel-title {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 16px;
+  color: #fff;
+  margin-bottom: 8px;
+}
+
+.react-lab-panel-desc {
+  font-size: 12px;
+  line-height: 1.8;
+  color: var(--text-dim);
+  max-width: 640px;
+}
+
+.react-lab-score {
+  min-width: 110px;
+  text-align: right;
+}
+
+.react-lab-score strong {
+  display: block;
+  font-family: 'Orbitron', sans-serif;
+  font-size: 30px;
+  color: var(--green);
+}
+
+.react-lab-score span {
+  font-size: 10px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--text-dim);
+}
+
+.react-lab-meter {
+  height: 8px;
+  border: 1px solid var(--border);
+  background: rgba(255,255,255,0.04);
+  overflow: hidden;
+  border-radius: 999px;
+}
+
+.react-lab-meter-fill {
+  height: 100%;
+  width: 0;
+  border-radius: inherit;
+  background: linear-gradient(90deg, var(--green), var(--blue));
+  box-shadow: 0 0 18px rgba(0,255,136,0.35);
+  transition: width 0.9s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.react-lab-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.react-lab-card {
+  padding: 14px;
+  border: 1px solid rgba(255,255,255,0.08);
+  background: rgba(0,0,0,0.2);
+  border-radius: 2px;
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.35s ease, background 0.35s ease, box-shadow 0.35s ease;
+}
+
+.react-lab-card:hover {
+  transform: translateY(-2px);
+  border-color: rgba(0,255,136,0.18);
+  box-shadow: 0 12px 22px rgba(0,0,0,0.18);
+}
+
+.react-lab-card-label {
+  font-size: 10px;
+  letter-spacing: 2px;
+  color: var(--text-dim);
+  text-transform: uppercase;
+  margin-bottom: 8px;
+}
+
+.react-lab-card-value {
+  font-size: 12px;
+  line-height: 1.7;
+  color: var(--text);
+}
+
+.react-lab-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.react-lab-tag {
+  font-size: 10px;
+  letter-spacing: 1px;
+  border: 1px solid rgba(0,255,136,0.18);
+  color: #d7ffe9;
+  background: rgba(0,255,136,0.05);
+  padding: 4px 10px;
+  border-radius: 20px;
+  font-family: 'Share Tech Mono', monospace;
+}
+
+.react-lab-panel.is-entering {
+  animation: reactPanelPop 0.9s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.react-lab-panel.is-fading-out .react-lab-card,
+.react-lab-panel.is-fading-out .react-lab-meter-fill,
+.react-lab-panel.is-fading-out .react-lab-score strong,
+.react-lab-panel.is-fading-out .react-lab-score span,
+.react-lab-panel.is-fading-out .react-lab-panel-title,
+.react-lab-panel.is-fading-out .react-lab-panel-desc {
+  transition: opacity 0.35s ease, transform 0.35s ease;
+  opacity: 0.15;
+}
+
+@keyframes reactPanelPop {
+  from { opacity: 0; transform: translateY(16px) scale(0.98); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
 }
 
 .nav-links a.active {
@@ -1450,6 +1840,12 @@ footer {
   body::before {
     background-position: 0 0 !important;
   }
+  .hero-glow-1,
+  .hero-glow-2,
+  .react-lab-panel.is-entering,
+  .tech-strip {
+    animation: none !important;
+  }
 }
 
 /* RESPONSIVE */
@@ -1462,6 +1858,8 @@ footer {
   .hero-flip-card { min-height: 520px; }
   .profile-body { grid-template-columns: 1fr; }
   .profile-photo { width: 120px; height: 120px; }
+  .react-lab-layout { grid-template-columns: 1fr; }
+  .react-lab-grid { grid-template-columns: 1fr; }
   .github-graphs { grid-template-columns: 1fr; }
   .github-grid { grid-template-columns: 1fr 1fr; }
   .skills-grid { grid-template-columns: 1fr 1fr; }
@@ -1500,6 +1898,7 @@ footer {
   <ul class="nav-links">
     <li><a href="#home">Home</a></li>
     <li><a href="#about">About</a></li>
+    <li><a href="#react-lab">React Lab</a></li>
     <li><a href="#skills">Skills</a></li>
     <li><a href="#projects">Projects</a></li>
     <li><a href="#github-stats">GitHub</a></li>
@@ -1671,11 +2070,23 @@ footer {
   </div>
 </section>
 
+<!-- REACT LAB -->
+<section id="react-lab" class="react-lab">
+  <div class="section-inner">
+    <div class="section-header fade-in">
+      <span class="section-num">02.</span>
+      <h2 class="section-title">React Lab</h2>
+      <div class="section-line"></div>
+    </div>
+    <div class="react-lab-shell fade-in" id="react-lab-root"></div>
+  </div>
+</section>
+
 <!-- SKILLS -->
 <section id="skills">
   <div class="section-inner">
     <div class="section-header fade-in">
-      <span class="section-num">02.</span>
+      <span class="section-num">03.</span>
       <h2 class="section-title">Skills & Expertise</h2>
       <div class="section-line"></div>
     </div>
@@ -1766,7 +2177,7 @@ footer {
 <section id="projects">
   <div class="section-inner">
     <div class="section-header fade-in">
-      <span class="section-num">03.</span>
+      <span class="section-num">04.</span>
       <h2 class="section-title">Projects</h2>
       <div class="section-line"></div>
     </div>
@@ -1883,20 +2294,20 @@ footer {
 <section id="github-stats">
   <div class="section-inner">
     <div class="section-header fade-in">
-      <span class="section-num">04.</span>
+      <span class="section-num">05.</span>
       <h2 class="section-title">GitHub Stats</h2>
       <div class="section-line"></div>
     </div>
     <div class="github-graphs">
-      <div class="github-graph-card fade-in">
-        <img src="https://github-readme-stats.vercel.app/api?username=abdelrahman22wanas&show_icons=true&theme=transparent&hide_border=true&title_color=00ff88&text_color=c8d8e8&icon_color=00aaff&ring_color=00ff88" alt="GitHub overall statistics" loading="lazy">
+      <div class="github-graph-card fade-in" id="ghOverviewCard">
+        <div class="github-placeholder">Loading GitHub overview...</div>
       </div>
-      <div class="github-graph-card fade-in" style="transition-delay:.08s;">
-        <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=abdelrahman22wanas&layout=compact&theme=transparent&hide_border=true&title_color=00ff88&text_color=c8d8e8" alt="Top GitHub languages" loading="lazy">
+      <div class="github-graph-card fade-in" id="ghLanguageCard" style="transition-delay:.08s;">
+        <div class="github-placeholder">Loading language breakdown...</div>
       </div>
     </div>
-    <div class="github-activity fade-in" style="transition-delay:.16s;">
-      <img src="https://github-readme-activity-graph.vercel.app/graph?username=abdelrahman22wanas&bg_color=050810&color=c8d8e8&line=00ff88&point=00aaff&area=true&hide_border=true" alt="GitHub contribution graph" loading="lazy">
+    <div class="github-activity fade-in" id="ghRepoChart" style="transition-delay:.16s;">
+      <div class="github-placeholder">Loading repository insights...</div>
     </div>
   </div>
 </section>
@@ -1905,7 +2316,7 @@ footer {
 <section id="experience">
   <div class="section-inner">
     <div class="section-header fade-in">
-      <span class="section-num">05.</span>
+      <span class="section-num">06.</span>
       <h2 class="section-title">Experience</h2>
       <div class="section-line"></div>
     </div>
@@ -1947,7 +2358,7 @@ footer {
 <section id="certifications">
   <div class="section-inner">
     <div class="section-header fade-in">
-      <span class="section-num">06.</span>
+      <span class="section-num">07.</span>
       <h2 class="section-title">Certifications</h2>
       <div class="section-line"></div>
     </div>
@@ -2007,7 +2418,7 @@ footer {
 <section id="contact">
   <div class="section-inner">
     <div class="section-header fade-in">
-      <span class="section-num">07.</span>
+      <span class="section-num">08.</span>
       <h2 class="section-title">Contact</h2>
       <div class="section-line"></div>
     </div>
@@ -2105,6 +2516,8 @@ footer {
   <div class="cmdk-list" id="cmdkList"></div>
 </div>
 
+<script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+<script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
 <script>
 const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 const finePointer = window.matchMedia("(pointer: fine)").matches;
@@ -2266,7 +2679,7 @@ backToTop?.addEventListener("click", () => {
   window.scrollTo({ top: 0, behavior: prefersReducedMotion ? "auto" : "smooth" });
 });
 
-// Scroll-linked parallax animation (disabled when user prefers reduced motion)
+// Scroll-linked parallax animation
 const parallaxEls = Array.from(document.querySelectorAll(".scroll-parallax"));
 let parallaxTicking = false;
 
@@ -2301,21 +2714,27 @@ const sectionMap = navLinks
     const section = document.querySelector(link.getAttribute("href"));
     return section ? { link, section } : null;
   })
-  .filter(Boolean);
+  .filter(Boolean)
+  .sort((a, b) => a.section.offsetTop - b.section.offsetTop);
 
-const sectionObserver = new IntersectionObserver(
-  (entries) => {
-    entries.forEach((entry) => {
-      if (!entry.isIntersecting) return;
-      sectionMap.forEach(({ link, section }) => {
-        link.classList.toggle("active", section === entry.target);
-      });
-    });
-  },
-  { threshold: 0.4, rootMargin: "-20% 0px -30% 0px" }
-);
+function updateActiveNavSection() {
+  const marker = window.scrollY + window.innerHeight * 0.32;
+  let current = sectionMap[0];
 
-sectionMap.forEach(({ section }) => sectionObserver.observe(section));
+  for (const item of sectionMap) {
+    if (item.section.offsetTop <= marker) {
+      current = item;
+    }
+  }
+
+  sectionMap.forEach(({ link, section }) => {
+    link.classList.toggle("active", section === current?.section);
+  });
+}
+
+window.addEventListener("scroll", updateActiveNavSection, { passive: true });
+window.addEventListener("resize", updateActiveNavSection);
+updateActiveNavSection();
 
 // Hero glow parallax
 const hero = document.querySelector(".hero");
@@ -2529,8 +2948,20 @@ window.addEventListener("keydown", (e) => {
 
 // GitHub stats
 const ghUser = "abdelrahman22wanas";
+const ghOverviewCard = document.getElementById("ghOverviewCard");
+const ghLanguageCard = document.getElementById("ghLanguageCard");
+const ghRepoChart = document.getElementById("ghRepoChart");
+
 function setGitHubStatsError() {
-  // Keep function for graceful failure without stat cards.
+  if (ghOverviewCard) {
+    ghOverviewCard.innerHTML = '<div class="github-placeholder">GitHub overview is unavailable right now.</div>';
+  }
+  if (ghLanguageCard) {
+    ghLanguageCard.innerHTML = '<div class="github-placeholder">Language breakdown is unavailable right now.</div>';
+  }
+  if (ghRepoChart) {
+    ghRepoChart.innerHTML = '<div class="github-placeholder">Repository insights are unavailable right now.</div>';
+  }
 }
 
 async function loadGitHubStats() {
@@ -2543,17 +2974,298 @@ async function loadGitHubStats() {
     const repos = await reposRes.json();
     if (!Array.isArray(repos)) throw new Error("Invalid repo response");
     const stars = repos.reduce((sum, repo) => sum + (repo.stargazers_count || 0), 0);
+    const forks = repos.reduce((sum, repo) => sum + (repo.forks_count || 0), 0);
     const langMap = {};
     repos.forEach((repo) => {
       if (!repo.language) return;
       langMap[repo.language] = (langMap[repo.language] || 0) + 1;
     });
     const topLang = Object.entries(langMap).sort((a, b) => b[1] - a[1])[0]?.[0] || "--";
+
+    const sortedLangs = Object.entries(langMap).sort((a, b) => b[1] - a[1]).slice(0, 5);
+    const totalLangCount = sortedLangs.reduce((sum, [, count]) => sum + count, 0) || 1;
+    const topRepos = [...repos]
+      .filter((repo) => repo.description || repo.stargazers_count || repo.language)
+      .sort((a, b) => (b.stargazers_count || 0) - (a.stargazers_count || 0))
+      .slice(0, 3);
+
+    if (ghOverviewCard) {
+      ghOverviewCard.innerHTML = `
+        <div class="github-card-title">GitHub Overview</div>
+        <div class="github-card-subtitle">Live profile metrics pulled from the GitHub API and rendered locally for reliability.</div>
+        <div class="github-metric-grid">
+          <div class="github-metric">
+            <div class="github-metric-label">Public Repos</div>
+            <div class="github-metric-value">${user.public_repos ?? repos.length}</div>
+            <div class="github-metric-desc">Repository count across the active profile.</div>
+          </div>
+          <div class="github-metric">
+            <div class="github-metric-label">Followers</div>
+            <div class="github-metric-value">${user.followers ?? 0}</div>
+            <div class="github-metric-desc">Community reach and profile engagement.</div>
+          </div>
+          <div class="github-metric">
+            <div class="github-metric-label">Total Stars</div>
+            <div class="github-metric-value">${stars}</div>
+            <div class="github-metric-desc">Stars collected across public repositories.</div>
+          </div>
+          <div class="github-metric">
+            <div class="github-metric-label">Top Language</div>
+            <div class="github-metric-value">${topLang}</div>
+            <div class="github-metric-desc">The language used most often in public repos.</div>
+          </div>
+        </div>
+        <div class="github-card-note">Following: ${user.following ?? 0} · Forks: ${forks}</div>
+      `;
+    }
+
+    if (ghLanguageCard) {
+      ghLanguageCard.innerHTML = `
+        <div class="github-card-title">Language Breakdown</div>
+        <div class="github-card-subtitle">A compact view of the dominant languages used across public repositories.</div>
+        <div class="github-language-list">
+          ${sortedLangs.length ? sortedLangs.map(([language, count]) => {
+            const percent = Math.max(6, Math.round((count / totalLangCount) * 100));
+            return `
+              <div class="github-language-row">
+                <div class="github-language-name">${language}</div>
+                <div class="github-language-track"><div class="github-language-fill" style="width:${percent}%"></div></div>
+                <div class="github-language-percent">${percent}%</div>
+              </div>
+            `;
+          }).join("") : '<div class="github-placeholder">No language data available.</div>'}
+        </div>
+      `;
+    }
+
+    if (ghRepoChart) {
+      // Build contribution data from repo push dates
+      const contributionMap = {};
+      const today = new Date();
+      
+      repos.forEach(repo => {
+        if (repo.pushed_at) {
+          const date = new Date(repo.pushed_at);
+          const dateStr = date.toISOString().split('T')[0];
+          contributionMap[dateStr] = (contributionMap[dateStr] || 0) + 1;
+        }
+      });
+
+      // Generate 12 weeks of data
+      const weeks = [];
+      for (let w = 0; w < 12; w++) {
+        const weekDays = [];
+        for (let d = 6; d >= 0; d--) {
+          const date = new Date(today);
+          date.setDate(date.getDate() - (w * 7 + d));
+          const dateStr = date.toISOString().split('T')[0];
+          const count = contributionMap[dateStr] || 0;
+          weekDays.push({ date: dateStr, count });
+        }
+        weeks.push(weekDays);
+      }
+
+      const maxCount = Math.max(...Object.values(contributionMap), 1);
+      const getColor = (count) => {
+        if (count === 0) return 'rgba(0, 255, 136, 0.05)';
+        if (count === 1) return 'rgba(0, 255, 136, 0.2)';
+        if (count === 2) return 'rgba(0, 255, 136, 0.4)';
+        if (count === 3) return 'rgba(0, 255, 136, 0.6)';
+        return 'rgba(0, 255, 136, 0.85)';
+      };
+
+      const weekLabels = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
+      const monthLabels = [];
+      for (let i = 0; i < 12; i++) {
+        const d = new Date(today);
+        d.setDate(d.getDate() - (i * 7));
+        if (i === 0 || d.getDate() <= 7) {
+          monthLabels.push(d.toLocaleString('default', { month: 'short' }));
+        } else {
+          monthLabels.push('');
+        }
+      }
+
+      ghRepoChart.innerHTML = `
+        <div class="github-card-title">Contribution Graph</div>
+        <div class="github-card-subtitle">12-week activity heatmap from your repository commits and pushes.</div>
+        
+        <div style="margin-top: 20px; overflow-x: auto;">
+          <div style="display: inline-flex; gap: 4px; align-items: flex-start; min-width: 100%; padding-bottom: 10px;">
+            <div style="display: flex; flex-direction: column; justify-content: flex-end; gap: 2px; padding-right: 8px; font-size: 9px; color: #888; width: 30px;">
+              ${weekLabels.map(label => `<div style="height: 14px; display: flex; align-items: center;">${label}</div>`).join('')}
+            </div>
+            ${weeks.reverse().map((week, widx) => `
+              <div style="display: flex; flex-direction: column; gap: 2px; align-items: center;">
+                <div style="font-size: 9px; color: #888; height: 16px; display: flex; align-items: flex-end; min-width: 16px;">${monthLabels[widx]}</div>
+                ${week.map(day => `
+                  <div style="width: 14px; height: 14px; border-radius: 3px; background: ${getColor(day.count)}; border: 1px solid rgba(0, 255, 136, 0.1); cursor: pointer;" title="${day.date}: ${day.count} commit(s)"></div>
+                `).join('')}
+              </div>
+            `).join('')}
+          </div>
+        </div>
+
+        <div style="margin-top: 18px; display: grid; grid-template-columns: 1fr 1fr; gap: 14px; align-items: center;">
+          <div style="background: linear-gradient(135deg, rgba(0, 255, 136, 0.1) 0%, rgba(0, 255, 136, 0.03) 100%); border: 1px solid rgba(0, 255, 136, 0.25); border-radius: 8px; padding: 14px; backdrop-filter: blur(2px);">
+            <div style="font-size: 10px; color: #00ff88; font-weight: 600; margin-bottom: 8px; letter-spacing: 0.8px; text-transform: uppercase;">Contribution Summary</div>
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+              <div style="border-left: 2px solid rgba(0, 255, 136, 0.4); padding-left: 8px;">
+                <div style="font-size: 16px; color: #00ff88; font-weight: 700;">${Object.keys(contributionMap).length}</div>
+                <div style="font-size: 10px; color: #888;">Active Days</div>
+              </div>
+              <div style="border-left: 2px solid rgba(0, 255, 136, 0.4); padding-left: 8px;">
+                <div style="font-size: 16px; color: #00ff88; font-weight: 700;">${Object.values(contributionMap).reduce((a, b) => a + b, 0)}</div>
+                <div style="font-size: 10px; color: #888;">Total Pushes</div>
+              </div>
+            </div>
+          </div>
+
+          <div style="background: linear-gradient(135deg, rgba(0, 200, 200, 0.1) 0%, rgba(0, 200, 200, 0.03) 100%); border: 1px solid rgba(0, 200, 200, 0.25); border-radius: 8px; padding: 14px; backdrop-filter: blur(2px);">
+            <div style="font-size: 10px; color: #00c8c8; font-weight: 600; margin-bottom: 8px; letter-spacing: 0.8px; text-transform: uppercase;">Contribution Legend</div>
+            <div style="display: flex; gap: 8px; align-items: center; flex-wrap: wrap;">
+              <div style="font-size: 10px; color: #888;">Less</div>
+              ${[0, 1, 2, 3, 4].map(i => `<div style="width: 12px; height: 12px; border-radius: 2px; background: ${getColor(i)}; border: 1px solid rgba(0, 255, 136, 0.1);"></div>`).join('')}
+              <div style="font-size: 10px; color: #888;">More</div>
+            </div>
+          </div>
+        </div>
+      `;
+    }
   } catch (err) {
     setGitHubStatsError();
   }
 }
 loadGitHubStats();
+
+// React-powered focus lab
+(() => {
+  const mountNode = document.getElementById("react-lab-root");
+  if (!mountNode || !window.React || !window.ReactDOM) return;
+  const isTouchLike = window.matchMedia("(pointer: coarse)").matches || navigator.maxTouchPoints > 0;
+
+  const focusItems = [
+    {
+      id: "security",
+      label: "Security Research",
+      subtitle: "Threat analysis and defensive engineering",
+      score: 96,
+      overview: "Ethical hacking, penetration testing, and vulnerability assessment.",
+      stats: ["MITRE mapping", "Lab tooling", "Secure review"],
+      tags: ["OWASP", "Nmap", "Wireshark", "Burp Suite"],
+      accent: "green"
+    },
+    {
+      id: "development",
+      label: "Software Engineering",
+      subtitle: "Practical applications with clean structure",
+      score: 91,
+      overview: "Java, Python, and web development with attention to maintainability.",
+      stats: ["OOP design", "APIs", "Database apps"],
+      tags: ["Java", "Python", "SQL", "HTML/CSS/JS"],
+      accent: "blue"
+    },
+    {
+      id: "systems",
+      label: "Hardware & Systems",
+      subtitle: "Digital logic and low-level understanding",
+      score: 84,
+      overview: "Verilog HDL, digital logic, and VLSI design with systems awareness.",
+      stats: ["RTL thinking", "Circuit logic", "Architecture"],
+      tags: ["Verilog HDL", "VLSI", "Digital Logic", "RDBMS"],
+      accent: "amber"
+    },
+    {
+      id: "community",
+      label: "IEEE Collaboration",
+      subtitle: "Team learning and technical community work",
+      score: 78,
+      overview: "Workshops, peer collaboration, and continuous improvement through IEEE AIU.",
+      stats: ["Events", "Teamwork", "Learning"],
+      tags: ["IEEE AIU", "Workshops", "Mentorship", "Collaboration"],
+      accent: "purple"
+    }
+  ];
+
+  function ReactLab() {
+    const [activeId, setActiveId] = React.useState("security");
+    const [phase, setPhase] = React.useState("idle");
+    const [displayedId, setDisplayedId] = React.useState("security");
+    const transitionRef = React.useRef({ fadeOut: null, fadeIn: null });
+    const active = focusItems.find(item => item.id === displayedId) || focusItems[0];
+
+    React.useEffect(() => {
+      if (transitionRef.current.fadeOut) clearTimeout(transitionRef.current.fadeOut);
+      if (transitionRef.current.fadeIn) clearTimeout(transitionRef.current.fadeIn);
+
+      setPhase("fading-out");
+      transitionRef.current.fadeOut = setTimeout(() => {
+        setDisplayedId(activeId);
+        setPhase("fading-in");
+        transitionRef.current.fadeIn = setTimeout(() => {
+          setPhase("idle");
+        }, 260);
+      }, 220);
+
+      return () => clearTimeout(transitionRef.current);
+    }, [activeId]);
+
+    const panelStateClass = phase === "fading-out" ? "is-fading-out" : phase === "fading-in" ? "is-fading-in" : "";
+
+    return React.createElement("div", {className: `react-lab-panel ${panelStateClass} ${active.accent ? `accent-${active.accent}` : ""}`}, 
+      React.createElement("div", {className: "react-lab-top"}, 
+        React.createElement("div", null,
+          React.createElement("div", {className: "react-lab-eyebrow"}, "React-powered interaction"),
+          React.createElement("div", {className: "react-lab-title"}, "Live Focus Dashboard"),
+          React.createElement("div", {className: "react-lab-copy"}, "A compact React layer that highlights my focus areas.")
+        ),
+        React.createElement("div", {className: "react-lab-score"},
+          React.createElement("strong", null, `${active.score}%`),
+          React.createElement("span", null, "Priority")
+        )
+      ),
+      React.createElement("div", {className: "react-lab-layout"},
+        React.createElement("div", {className: "react-lab-tabs"},
+          focusItems.map(item => React.createElement("button", {
+            key: item.id,
+            type: "button",
+            className: `react-lab-tab${item.id === active.id ? " active" : ""}`,
+            onClick: () => setActiveId(item.id)
+          }, item.label))
+        ),
+        React.createElement("div", {className: "react-lab-panel-body"},
+          React.createElement("div", {className: "react-lab-panel-head"},
+            React.createElement("div", null,
+              React.createElement("div", {className: "react-lab-panel-title"}, active.subtitle),
+              React.createElement("div", {className: "react-lab-panel-desc"}, active.overview)
+            ),
+            React.createElement("div", {className: "react-lab-score"},
+              React.createElement("strong", null, active.score),
+              React.createElement("span", null, "Focus Index")
+            )
+          ),
+          React.createElement("div", {className: "react-lab-meter", "aria-hidden": "true"},
+            React.createElement("div", {className: "react-lab-meter-fill", style: {width: `${active.score}%`}})
+          ),
+          React.createElement("div", {className: "react-lab-grid"},
+            active.stats.map((val, i) => React.createElement("div", {className: "react-lab-card", key: `${active.id}-${i}`},
+              React.createElement("div", {className: "react-lab-card-label"}, i === 0 ? "Core" : i === 1 ? "Practice" : "Output"),
+              React.createElement("div", {className: "react-lab-card-value"}, val)
+            ))
+          ),
+          React.createElement("div", {className: "react-lab-card"},
+            React.createElement("div", {className: "react-lab-card-label"}, "Tooling"),
+            React.createElement("div", {className: "react-lab-tags"},
+              active.tags.map(tag => React.createElement("span", {className: "react-lab-tag", key: tag}, tag))
+            )
+          )
+        )
+      )
+    );
+  }
+
+  ReactDOM.createRoot(mountNode).render(React.createElement(ReactLab));
+})();
 </script>
 </body>
 </html>
